@@ -140,7 +140,15 @@ def unquote_string(string):
     return u''.join(result)
 
 
-def tokenize(source, jsx=True, dotted=True, template_string=True):
+def tokenize(*args, **kwargs):
+    for token in tokenize_(*args, **kwargs):
+        strtoken = repr(token)
+        if len(strtoken) > 100:
+            print(strtoken)
+        yield token
+
+
+def tokenize_(source, jsx=True, dotted=True, template_string=True):
     """
     Tokenize JavaScript/JSX source.  Returns a generator of tokens.
 
